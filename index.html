@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>StudyFlow</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap">
+<style>
+:root{--green:#3CFF5E;--glow:rgba(60,255,94,.45);--bg:#030303;--card:#0B0B0C;--line:#1E1E20;--soft:#D6D6D6;--gray:#2B2B2E}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;min-height:100vh;font-family:"Outfit",system-ui,sans-serif;color:#fff;background:radial-gradient(circle at 85% 10%,rgba(60,255,94,.10),transparent 40%),radial-gradient(circle at 10% 90%,rgba(60,255,94,.05),transparent 35%),var(--bg);background-attachment:fixed;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+::selection{background:rgba(60,255,94,.35)}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 20px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.logo span{color:var(--green);text-shadow:0 0 14px var(--glow)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{background:none;border:0;color:#fff;font:500 15px "Outfit",sans-serif;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.2s}
+nav button:hover{color:var(--green)}
+nav button.on{color:var(--green);background:rgba(60,255,94,.1);box-shadow:0 0 14px rgba(60,255,94,.18)}
+.hero{padding:64px 0 20px}.hero.small{padding:40px 0 10px}
+.eyebrow{color:var(--green);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+h1{font-size:clamp(36px,9vw,76px);font-weight:700;line-height:1.05;letter-spacing:-1.5px;margin:0 0 22px}
+.small h1{font-size:clamp(34px,6vw,56px)}
+.lead{color:var(--soft);font-size:18px;font-weight:300;line-height:1.8;max-width:560px;margin:0}
+h2{font-size:26px;font-weight:600;letter-spacing:-.5px;margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:30px 0}
+.btn{border:0;border-radius:999px;padding:14px 32px;font:600 16px "Outfit",sans-serif;cursor:pointer;transition:.25s}
+.p{background:var(--green);color:#000;box-shadow:0 8px 30px var(--glow)}
+.p:hover{background:#66FF82;box-shadow:0 10px 40px rgba(60,255,94,.65);transform:translateY(-1px)}
+.s{background:var(--gray);color:var(--green)}
+.s:hover{background:#3A3A3E;box-shadow:0 0 18px rgba(60,255,94,.2)}
+.btns{display:flex;gap:14px;flex-wrap:wrap;margin:32px 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px 26px;transition:.25s}
+.card:hover{border-color:rgba(60,255,94,.55);box-shadow:0 0 24px rgba(60,255,94,.18)}
+.card small{color:#9a9a9a;font-size:15px}
+.card b{display:block;color:var(--green);font-size:44px;font-weight:700;text-shadow:0 0 16px rgba(60,255,94,.35);margin-top:6px}
+.card h3{margin:0 0 4px;font-size:20px;font-weight:600}
+.bar{height:10px;border-radius:999px;background:#1a1a1c;margin:26px 0 8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:999px;box-shadow:0 0 14px var(--glow);transition:width .4s}
+.cap{color:#8c8c8c;font-size:14px}
+form{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:26px}
+label{display:block;color:var(--soft);font-size:15px;margin:0 0 8px}
+input[type=text],select{width:100%;background:#0E0E10;color:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;font:400 16px "Outfit",sans-serif;margin-bottom:18px;outline:0;transition:.2s}
+input[type=text]:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 1px var(--green),0 0 18px rgba(60,255,94,.25)}
+select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%233CFF5E' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.msg{margin-top:14px;font-size:15px;min-height:20px}
+.ok{color:var(--green)}.warn{color:#FFD23C}
+.task{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.task .info{flex:1;min-width:0}
+.task .t{font-size:17px;word-break:break-word}
+.task.done .t{color:#777;text-decoration:line-through}
+.task .sub{color:#8c8c8c;font-size:14px;margin-top:2px}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;border:2px solid #3A3A3E;border-radius:7px;background:#0E0E10;cursor:pointer;position:relative;transition:.2s}
+input[type=checkbox]:checked{background:var(--green);border-color:var(--green);box-shadow:0 0 12px var(--glow)}
+input[type=checkbox]:checked::after{content:"";position:absolute;left:7px;top:2px;width:6px;height:12px;border:solid #000;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.del{flex:none;background:var(--gray);border:0;border-radius:999px;padding:9px 14px;cursor:pointer;font-size:16px;transition:.2s}
+.del:hover{background:#3A3A3E;box-shadow:0 0 14px rgba(60,255,94,.25)}
+.empty{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 22px;color:var(--soft)}
+.last{color:var(--soft);font-size:17px;margin:10px 0}.last b{color:#fff;font-weight:600}
+@media(max-width:768px){
+.wrap{padding:16px 16px 48px}.logo{font-size:22px}
+nav{gap:2px}nav button{padding:6px 12px;font-size:14px}
+.hero{padding:32px 0 8px}.hero.small{padding:24px 0 6px}
+.eyebrow{font-size:11px;letter-spacing:1.5px;margin-bottom:12px}
+.lead{font-size:16px;line-height:1.7}h2{font-size:22px}
+.btns .btn,form .btn{width:100%}.btn{padding:13px 22px}
+.card{padding:16px 20px;border-radius:20px}.card b{font-size:34px}
+form{padding:18px;border-radius:22px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="logo">Study<span>Flow</span></div>
+    <nav id="nav"></nav>
+  </div>
+  <main id="view"></main>
+</div>
+<script>
+var PAGES=["Обзор","Мои задачи","Предметы","Статистика"];
+var SUBJECTS=["Информатика","Математика","Русский язык","Другое"];
+var KEY="studyflow_tasks";
+var page=PAGES[0];
+var memory=[];
+
+function load(){
+  try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):[];}
+  catch(e){return memory;}
+}
+function save(t){
+  memory=t;
+  try{localStorage.setItem(KEY,JSON.stringify(t));}catch(e){}
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+function stats(t){
+  var done=t.filter(function(x){return x.done;}).length;
+  return {total:t.length,done:done,left:t.length-done,pct:t.length?Math.round(done/t.length*100):0};
+}
+function header(eyebrow,title,text,small){
+  return '<div class="hero'+(small?' small':'')+'"><div class="eyebrow">'+eyebrow+'</div><h1>'+title+'</h1>'+(text?'<p class="lead">'+text+'</p>':'')+'</div>';
+}
+function go(p){page=p;render();window.scrollTo(0,0);}
+
+function renderNav(){
+  var n=document.getElementById("nav");
+  n.innerHTML="";
+  PAGES.forEach(function(p){
+    var b=document.createElement("button");
+    b.textContent=p;
+    if(p===page)b.className="on";
+    b.onclick=function(){go(p);};
+    n.appendChild(b);
+  });
+}
+
+function viewOverview(t){
+  var s=stats(t);
+  var h=header("Твой личный планировщик учёбы","Учись в потоке,<br>а не в хаосе","StudyFlow — это место, где все твои задачи и предметы под контролем: добавляй, отмечай выполненное и смотри свой прогресс.");
+  h+='<div class="btns"><button class="btn p" data-go="Мои задачи">Мои задачи</button><button class="btn s" data-go="Статистика">Статистика</button></div>';
+  h+='<div class="grid"><div class="card"><small>Всего задач</small><b>'+s.total+'</b></div><div class="card"><small>Выполнено</small><b>'+s.done+'</b></div><div class="card"><small>Прогресс</small><b>'+s.pct+'%</b></div></div>';
+  h+='<div class="bar"><i style="width:'+s.pct+'%"></i></div><div class="cap">Выполнено '+s.pct+'% задач</div><hr><h2>Последние задачи</h2>';
+  if(t.length){
+    t.slice().reverse().slice(0,5).forEach(function(x){
+      h+='<p class="last">'+(x.done?"✅":"⬜")+' <b>'+esc(x.title)+'</b> — '+esc(x.subject)+'</p>';
+    });
+  }else h+='<div class="empty">Пока задач нет. Добавь первую!</div>';
+  return h;
+}
+
+function viewTasks(t){
+  var h=header("Задачи","Мои задачи","Управляй своими учебными заданиями.",true);
+  h+='<h2>Добавить задачу</h2><form id="f"><label for="ti">Название задачи</label><input type="text" id="ti" maxlength="200" placeholder="Например: решить 5 задач по информатике" autocomplete="off"><label for="su">Предмет</label><select id="su">';
+  SUBJECTS.forEach(function(s){h+='<option>'+s+'</option>';});
+  h+='</select><button class="btn p" type="submit">Добавить задачу</button><div class="msg" id="msg"></div></form><hr><h2>Список задач</h2>';
+  if(t.length){
+    t.slice().reverse().forEach(function(x){
+      h+='<div class="task'+(x.done?' done':'')+'"><input type="checkbox" data-id="'+x.id+'"'+(x.done?' checked':'')+' aria-label="Выполнено"><div class="info"><div class="t">'+esc(x.title)+'</div><div class="sub">Предмет: '+esc(x.subject)+'</div></div><button class="del" data-del="'+x.id+'" aria-label="Удалить задачу" title="Удалить задачу">🗑️</button></div>';
+    });
+  }else h+='<div class="empty">Пока задач нет. Добавь первую!</div>';
+  return h;
+}
+
+function viewSubjects(t){
+  var h=header("Предметы","Мои предметы","Прогресс по каждому предмету отдельно.",true);
+  var names=[];
+  t.forEach(function(x){if(names.indexOf(x.subject)<0)names.push(x.subject);});
+  names.sort();
+  if(!names.length)return h+'<div class="empty">Сначала добавь несколько задач!</div>';
+  h+='<div class="grid">';
+  names.forEach(function(n){
+    var st=t.filter(function(x){return x.subject===n;});
+    var d=st.filter(function(x){return x.done;}).length;
+    h+='<div class="card"><h3>'+esc(n)+'</h3><small>Выполнено</small><b>'+d+' / '+st.length+'</b></div>';
+  });
+  return h+'</div>';
+}
+
+function viewStats(t){
+  var s=stats(t);
+  var h=header("Статистика","Твой прогресс","Сколько уже сделано и сколько осталось.",true);
+  h+='<div class="grid"><div class="card"><small>Всего задач</small><b>'+s.total+'</b></div><div class="card"><small>Осталось выполнить</small><b>'+s.left+'</b></div></div>';
+  h+='<h2 style="margin-top:32px">Общий прогресс</h2><div class="bar" style="margin-top:10px"><i style="width:'+s.pct+'%"></i></div><div class="cap">Выполнено: '+s.pct+'%</div>';
+  if(s.total>0&&s.done===s.total)h+='<p class="ok" style="margin-top:20px">Все задачи выполнены! Отличная работа!</p>';
+  else if(s.total===0)h+='<div class="empty" style="margin-top:20px">Пока недостаточно данных для статистики.</div>';
+  return h;
+}
+
+function render(){
+  var t=load();
+  renderNav();
+  var v=document.getElementById("view");
+  v.innerHTML=page==="Обзор"?viewOverview(t):page==="Мои задачи"?viewTasks(t):page==="Предметы"?viewSubjects(t):viewStats(t);
+  Array.prototype.forEach.call(v.querySelectorAll("[data-go]"),function(b){
+    b.onclick=function(){go(b.getAttribute("data-go"));};
+  });
+  Array.prototype.forEach.call(v.querySelectorAll("[data-del]"),function(b){
+    b.onclick=function(){
+      var id=b.getAttribute("data-del");
+      save(load().filter(function(x){return String(x.id)!==id;}));
+      render();
+    };
+  });
+  Array.prototype.forEach.call(v.querySelectorAll("input[data-id]"),function(c){
+    c.onchange=function(){
+      var id=c.getAttribute("data-id");
+      var all=load();
+      all.forEach(function(x){if(String(x.id)===id)x.done=c.checked;});
+      save(all);
+      render();
+    };
+  });
+  var f=document.getElementById("f");
+  if(f){
+    f.onsubmit=function(e){
+      e.preventDefault();
+      var title=document.getElementById("ti").value.trim();
+      var subject=document.getElementById("su").value;
+      var msg=document.getElementById("msg");
+      if(!title){msg.className="msg warn";msg.textContent="Введите название задачи";return;}
+      var all=load();
+      all.push({id:Date.now(),title:title,subject:subject,done:false});
+      save(all);
+      render();
+      var m=document.getElementById("msg");
+      m.className="msg ok";m.textContent="Задача добавлена!";
+    };
+  }
+}
+render();
+</script>
+</body>
+</html>
